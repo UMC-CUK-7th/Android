@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkcharcoal">
+
+    <ImageView
+        android:id="@+id/papgo_main_img_logo_iv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/papago_main_img_logo"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/papgo_main_txt_logo_iv"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/papago_main_txt_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"/>
+
+</RelativeLayout>
