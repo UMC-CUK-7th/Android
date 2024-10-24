@@ -34,9 +34,22 @@ class HomeFragment : Fragment() {
         val bannerAdapter = BannerVPAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+        binding.homeBannerIndicator.setViewPager(binding.homeBannerVp)
+
+
+
+        val pannelAdpater = PannelVpAdapter(this)
+        pannelAdpater.addFragment(PannelFragment(R.drawable.img_first_album_default))
+        pannelAdpater.addFragment(PannelFragment(R.drawable.img_first_album_default))
+
+        binding.homePannelBackgroundVp.adapter = pannelAdpater
+        binding.homePannelBackgroundVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        binding.homePannelIndicator.setViewPager(binding.homePannelBackgroundVp)
 
         return binding.root
     }

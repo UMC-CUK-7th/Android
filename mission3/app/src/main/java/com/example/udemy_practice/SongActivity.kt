@@ -1,5 +1,7 @@
 package com.example.udemy_practice
 
+import MainActivity
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
