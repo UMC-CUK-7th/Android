@@ -7,16 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.seongeun.flo.databinding.FragmentPannelBinding
 
-class PannelFragment : Fragment() {
-    lateinit var binding : FragmentPannelBinding
-
+class PannelFragment(val imgRes : Int) : Fragment() {
+    lateinit var binding: FragmentPannelBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPannelBinding.inflate(inflater, container, false)
-
+        binding.pannelImageIv.setImageResource(imgRes)
         return binding.root
     }
 }
