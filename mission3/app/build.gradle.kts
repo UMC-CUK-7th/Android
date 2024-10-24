@@ -59,4 +59,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("me.relex:circleindicator:2.1.6")
+    implementation("androidx.fragment:fragment-ktx:1.3.0")
 }

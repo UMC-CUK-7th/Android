@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
 import com.example.udemy_practice.databinding.FragmentHomeBinding
 import java.util.Timer
@@ -26,6 +28,9 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.homeAlbumImgIv1.setOnClickListener {
+            setFragmentResult("TitleInfo", bundleOf("title" to binding.titleLilac.text.toString()))
+            setFragmentResult("SingerInfo", bundleOf("singer" to binding.singerIu.text.toString()))
+
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment())
                 .commitAllowingStateLoss()
