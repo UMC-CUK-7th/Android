@@ -2,12 +2,14 @@ package com.example.udemy_practice
 
 import MainActivity
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.udemy_practice.databinding.ActivitySongBinding
+import com.google.gson.Gson
 import java.util.Timer
 
 class SongActivity : AppCompatActivity() {
@@ -21,11 +23,26 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var title : String? = null
+        var singer : String? = null
+
+        if(intent.hasExtra("title") && intent.hasExtra("singer")){
+            title = intent.getStringExtra("title")
+            singer = intent.getStringExtra("singer")
+            binding.songMusicTitleTv.text = title
+            binding.songSingerNameTv.text = singer
+        }
+
+
         initSong()
         setPlayer(song)
 
 
         binding.songDownIb.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("message", title + " _ " + singer)
+            setResult(RESULT_OK, intent)
+            finish()
             finish()
         }
 
@@ -40,19 +57,41 @@ class SongActivity : AppCompatActivity() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        setPlayerStatus(false)
+
+        song.second = (song.playTime * binding.songProgressSb.progress) / 100000
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val songToJson = gson.toJson(song)
+        editor.putString("songData", songToJson)
+        Log.d("songData", songToJson.toString())
+        editor.apply()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         timer.interrupt()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
     }
+
+    private var mediaPlayer : MediaPlayer? = null
+    private var gson : Gson = Gson()
 
     private fun initSong(){
         if(intent.hasExtra("title") && intent.hasExtra("singer")){
             song = Song(
+
                 intent.getStringExtra("title")!!,
                 intent.getStringExtra("singer")!!,
                 intent.getIntExtra("second",0),
                 intent.getIntExtra("playTime",0),
-                intent.getBooleanExtra("isPlaying",false)
+                intent.getBooleanExtra("isPlaying",false),
+                intent.getStringExtra("music")!!
+
             )
         }
         startTimer()
@@ -64,6 +103,9 @@ class SongActivity : AppCompatActivity() {
         binding.songStartTimeTv.text = String.format("%02d:%02d",song.second / 60, song.second % 60)
         binding.songEndTimeTv.text = String.format("%02d:%02d",song.playTime / 60, song.playTime % 60)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
+
+        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+        mediaPlayer = MediaPlayer.create(this, music)
 
         setPlayerStatus(song.isPlaying)
 
@@ -77,9 +119,16 @@ class SongActivity : AppCompatActivity() {
         if(isPlaying){
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+            mediaPlayer?.start()
         } else {
             binding.songMiniplayerIv.visibility = View.VISIBLE
             binding.songPauseIv.visibility = View.GONE
+
+            if(mediaPlayer?.isPlaying == true) {
+                mediaPlayer?.pause()
+            }
+
+
         }
 
     }

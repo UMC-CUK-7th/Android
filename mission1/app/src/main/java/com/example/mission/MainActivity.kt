@@ -22,34 +22,34 @@ class MainActivity : AppCompatActivity() {
             insets
 
         }
-        val image1 = findViewById<ImageView>(R.id.imageView1)
+        val image1 = findViewById<ImageView>(R.id.emotion_yellow)
         image1.setOnClickListener {
             Toast.makeText(this, "1번 사진 선택", Toast.LENGTH_LONG).show()
             val intent = Intent(this, Photo1Activity::class.java)
             startActivity(intent)
         }
-        val image2 = findViewById<ImageView>(R.id.imageView2)
+        val image2 = findViewById<ImageView>(R.id.emotion_blue)
         image2.setOnClickListener {
             Toast.makeText(this, "2번 사진 선택", Toast.LENGTH_LONG).show()
             val intent = Intent(this, Photo2Activity::class.java)
             startActivity(intent)
         }
 
-        val image3 = findViewById<ImageView>(R.id.imageView3)
+        val image3 = findViewById<ImageView>(R.id.emotion_green)
         image3.setOnClickListener {
             Toast.makeText(this, "3번 사진 선택", Toast.LENGTH_LONG).show()
             val intent = Intent(this, Photo3Activity::class.java)
             startActivity(intent)
         }
 
-        val image4 = findViewById<ImageView>(R.id.imageView4)
+        val image4 = findViewById<ImageView>(R.id.emotion_purple)
         image4.setOnClickListener {
             Toast.makeText(this, "4번 사진 선택", Toast.LENGTH_LONG).show()
             val intent = Intent(this, Photo4Activity::class.java)
             startActivity(intent)
         }
 
-        val image5 = findViewById<ImageView>(R.id.imageView5)
+        val image5 = findViewById<ImageView>(R.id.emotion_red)
         image5.setOnClickListener {
             Toast.makeText(this, "5번 사진 선택", Toast.LENGTH_LONG).show()
             val intent = Intent(this, Photo5Activity::class.java)
