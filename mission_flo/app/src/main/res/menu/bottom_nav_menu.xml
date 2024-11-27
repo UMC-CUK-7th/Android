@@ -6,7 +6,9 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_bottom_home_no_select"
         app:showAsAction="always"
-        android:title="홈"/>
+        android:enabled="true"
+        android:title="홈"
+        tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/lookFragment"
         android:icon="@drawable/ic_bottom_look_no_select"
